@@ -2,7 +2,6 @@ import os
 import json
 import asyncio
 from datetime import datetime
-import pytz
 import anthropic
 from telegram import Update
 from telegram.ext import Application, MessageHandler, filters, ContextTypes, CommandHandler
@@ -70,7 +69,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         response = client.messages.create(
             model="claude-opus-4-5",
             max_tokens=1000,
-            system=SYSTEM_PROMPT.format(datetime=datetime.now(pytz.timezone('Europe/Bucharest')).strftime("%d/%m/%Y %H:%M")),,
+            system=SYSTEM_PROMPT.format(datetime=datetime.now().strftime("%d/%m/%Y %H:%M")),
             messages=user_histories[user_id]
         )
 
